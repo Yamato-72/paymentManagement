@@ -1,0 +1,76 @@
+<head>
+    <meta charset="utf-8">
+    <title>paymentsApp home</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+
+  <body>
+    <header>
+        <div class="header-container">
+            <h1><a href="/">支払管理システム</a></h1>
+            <div class="header-list">
+                <ul>
+                    <li><a href="/table">一覧表</a></li>
+                    <li><a href="/register">新規登録</a></li>
+                </ul>
+            </div>
+        </div> 
+    </header>
+
+    <%
+    // 月ごとのデータをまとめる
+    const monthlyMap = {};
+  
+    payments.forEach(item => {
+      const month = item.payment_month;
+      const amount = parseFloat(item.total_amount);
+  
+      if (!monthlyMap[month]) {
+        monthlyMap[month] = {
+          variable: 0,
+          selling: 0
+        };
+      }
+  
+      if (item.account_category === '変動費') {
+        monthlyMap[month].variable += amount;
+      } else if (item.account_category === '販管費') {
+        monthlyMap[month].selling += amount;
+      }
+    });
+  
+    // 月順にソート（降順）
+    const sortedMonths = Object.keys(monthlyMap).sort((a, b) => b.localeCompare(a));
+  %>
+  
+  <div class="summary-wrapper">
+    <% sortedMonths.forEach(month => { 
+         const data = monthlyMap[month];
+         const total = data.variable + data.selling;
+    %>
+      <div style="display: flex; justify-content: space-between; align-items: center; background-color: #B7CADC; padding: 12px 16px; margin-top: 30px; border-radius: 8px;">
+        <h2 style="margin: 0; font-size: 1.4em; color: black;"><%= month %></h2>
+        <div style="font-size: 1.2em; font-weight: bold; color: black;">月合計：￥<%= total.toLocaleString('ja-JP') %></div>
+      </div>
+  
+      <ul class="summary-body">
+        <li>
+          <div class="home-item-data">
+            <span class="account-category-column">変動費合計</span>
+            <span class="total-amount-column">￥<%= data.variable.toLocaleString('ja-JP') %></span>
+          </div>
+        </li>
+        <li>
+          <div class="home-item-data">
+            <span class="account-category-column">販管費合計</span>
+            <span class="total-amount-column">￥<%= data.selling.toLocaleString('ja-JP') %></span>
+          </div>
+        </li>
+      </ul>
+    <% }); %>
+  </div>
+  
+    
+
+</body>
+</html>

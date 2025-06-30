@@ -1,0 +1,29 @@
+<head>
+    <meta charset="utf-8">
+    <title>paymentsApp register</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+
+
+<body> 
+  <header>
+    <div class="header-container">
+        <h1><a href="/">支払管理システム</a></h1>
+        <div class="header-list">
+            <ul>
+                <li><a href="/table">一覧表</a></li>
+                <li><a href="/register">新規登録</a></li>
+            </ul>
+        </div>
+    </div> 
+  </header>
+
+  <p>本当に削除しますか？</p>
+
+  <form action="/delete/<%= item.id %>" method="post">
+    <input type="submit" value="はい">
+  </form>
+
+
+</body>

@@ -1,0 +1,74 @@
+<head>
+    <meta charset="utf-8">
+    <title>paymentsApp register</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+
+
+<body> 
+  <header>
+    <div class="header-container">
+        <h1><a href="/">支払管理システム</a></h1>
+        <div class="header-list">
+            <ul>
+                <li><a href="/table">一覧表</a></li>
+                <li><a href="/register">新規登録</a></li>
+            </ul>
+        </div>
+    </div> 
+  </header>
+
+    <div class="register-title">
+        <h1>新規登録</h1> 
+    </div>
+
+    <div class="register-form">
+    <form action="/register" method="POST">
+        <div class="register-box">
+            <label for="account_category">勘定科目:</label>
+            <select name="account_category" id="account_category">
+            <% const account_category = ["変動費", "販管費"]; %>
+            <% account_category.forEach(function(account_category) { %>
+                <option value="<%= account_category %>"><%= account_category %></option>
+            <% }); %>
+            </select>
+        </div>
+
+        <div class="register-box">
+            <label for="payee">支払先:</label>
+            <input id="payee" name="payee">
+        </div>
+
+        <div class="register-box">
+            <label for="amount">金額:</label>
+            <input id="amount" name="amount">
+        </div>
+
+        <div class="register-box">
+            <label for="payment_month">支払月:</label>
+            <input id="payment_month" type="month" name="payment_month">
+        </div>
+
+        <div class="register-box">
+            <label for="payment_method">支払種別:</label>
+            <select name="payment_method" id="payment_method">
+            <% const payment_method = ["振込", "口座振替","クレジットカード"]; %>
+            <% payment_method.forEach(function(payment_method) { %>
+                <option value="<%= payment_method %>"><%= payment_method %></option>
+            <% }); %>
+            </select>
+        </div>
+
+        <div class="register-button">
+        <button type="submit"><span>登録する</span></button>
+        </div>
+
+    </form>
+</div>
+
+   
+  
+    
+
+</body>

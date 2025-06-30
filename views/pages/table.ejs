@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>paymentsApp table</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+
+
+
+<body>
+
+  <header>
+    <div class="header-container">
+        <h1><a href="/">支払管理システム</a></h1>
+        <div class="header-list">
+            <ul>
+                <li><a href="/table">一覧表</a></li>
+                <li><a href="/register">新規登録</a></li>
+            </ul>
+        </div>
+    </div> 
+  </header>
+   
+  <div class="table-container">
+    <div class="table-container-header">
+      <h1>支払一覧</h1>
+      <a href="/register" class="table-register-button">+ 新規作成</a>
+    </div>
+    <div class="table-wrapper">
+      <div class="table-head">
+        <span class="id-column">ID</span>
+        <span class="account_category-column">勘定科目</span>
+        <span class="payee-column">支払先</span>
+        <span class="amount-column">金額</span>
+        <span class="payment_month-column">支払月</span>
+        <span class="payment_method-column">支払方法</span>
+        <span class="created_at-column">作成日</span>
+      </div>
+      <ul class="table-body">
+        <% payments.forEach((item) => { %>
+          <li>
+            <div class="table-item-data">
+                <span class="id-column"><%= item.id %></span>
+                <span class="account_category-column"><%= item.account_category %></span>
+                <span class="payee-column"><%= item.payee %></span>
+                <span class="amount-column">￥<%= parseFloat(item.amount).toLocaleString('ja-JP') %></span>
+                <span class="payment_month-column"><%= item.payment_month %></span>
+                <span class="payment_method-column"><%= item.payment_method %></span>
+                <span class="created_at-column"><%= item.created_at %></span>
+                  <a href="/delete-confirm/<%= item.id %>">削除</a>
+                  <a href="/edit/<%= item.id %>">編集</a>
+                
+            </div>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+
+
+
+</body>
